@@ -1,3 +1,5 @@
 *.a
 *.o
 sample
+compile_commands.json
+/.cache/
