@@ -1,10 +1,12 @@
-all: sample
-sample: sample.o arg.o
-	clang -o $@ $^
+all: libarg.a
+libarg.a: arg.o
+	ar rcs libarg.a arg.o
 arg.o: arg.c arg.h
-	clang -c $<
+	clang -g -c $<
+sample: sample.o libarg.a
+	clang -L. -larg -o $@ $^
 sample.o: sample.c arg.h
 	clang -c $<
 clean:
-	rm -f *.o sample
+	rm -f *.o libarg.a sample
 .PHONY: clean all
