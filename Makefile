@@ -1,7 +1,7 @@
 all: libarg.a
 test: presence_test
 %_test: %_test.c libarg.a
-	clang -o $@ $< libarg.a
+	clang -o $@ $^
 	./$@
 	rm $@
 libarg.a: arg.o
