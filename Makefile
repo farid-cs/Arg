@@ -1,12 +1,13 @@
 all: libarg.a
+test: presence_test
+%_test: %_test.c libarg.a
+	clang -o $@ $< libarg.a
+	./$@
+	rm $@
 libarg.a: arg.o
 	ar rcs libarg.a arg.o
 arg.o: arg.c arg.h
 	clang -g -c $<
-sample: sample.o libarg.a
-	clang -L. -larg -o $@ $^
-sample.o: sample.c arg.h
-	clang -c $<
 clean:
-	rm -f *.o libarg.a sample
-.PHONY: clean all
+	rm -f *.o libarg.a
+.PHONY: test clean all
